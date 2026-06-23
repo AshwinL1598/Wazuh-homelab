@@ -1,43 +1,45 @@
-Project Title: Wazuh Security Operations Lab
-Overview
+**Project Title: Wazuh Security Operations Lab**
+
+**Overview**
 A self-hosted Security Operations Center (SOC) lab environment built to practice incident detection, log analysis, and endpoint monitoring using the Wazuh SIEM.
 
-Lab Architecture
-Core Setup Steps
-Environment Provisioning:
+**Lab Architecture**
 
-Set up two VMs (Ubuntu 22.04 LTS for the Manager, Windows 11 Enterprise for the Endpoint).
+*Core Setup Steps*
+**Environment Provisioning:**
 
-Configure network adapters to Bridged Mode to ensure both VMs are on the same subnet as the host machine.
+#Set up two VMs (Ubuntu 22.04 LTS for the Manager, Windows 11 Enterprise for the Endpoint).
 
-Wazuh Manager Installation:
+#Configure network adapters to Bridged Mode to ensure both VMs are on the same subnet as the host machine.
 
-Download the Wazuh installation script: curl -sO https://packages.wazuh.com/4.9/wazuh-install.sh.
+**Wazuh Manager Installation:**
 
-Generate configuration files: sudo bash ./wazuh-install.sh -g.
+#Download the Wazuh installation script: **curl -sO https://packages.wazuh.com/4.9/wazuh-install.sh.**
 
-Crucial Step: Edit config.yml to specify the static local IP of the Ubuntu VM (192.168.x.x). This prevents certificate mismatches.
+#Generate configuration files: **sudo bash ./wazuh-install.sh -g.**
 
-Execute full deployment: sudo bash ./wazuh-install.sh -a.
+**Crucial Step:** Edit config.yml to specify the static local IP of the Ubuntu VM (192.168.x.x). This prevents certificate mismatches.
 
-Agent Deployment:
+#Execute full deployment: sudo bash ./wazuh-install.sh -a.
 
-Access the Wazuh Dashboard at https://<Ubuntu_VM_IP>.
+**Agent Deployment:**
 
-Navigate to Agents Management > Deploy new agent.
+#Access the Wazuh Dashboard at https://<Ubuntu_VM_IP>.
 
-Select Windows and input the Manager's IP address.
+#Navigate to Agents Management > Deploy new agent.
 
-Agent Enrollment:
+#Select Windows and input the Manager's IP address.
 
-Run the generated PowerShell command on the Windows VM as Administrator to install the agent.
+**Agent Enrollment:**
 
-Use the manage_agents tool on the Ubuntu host to extract an authentication key (E option) for the specific agent ID.
+#Run the generated PowerShell command on the Windows VM as Administrator to install the agent.
 
-Import the key into the Wazuh Agent manager UI on the Windows endpoint to finalize the "Active" handshake.
+#Use the manage_agents tool on the Ubuntu host to extract an authentication key (E option) for the specific agent ID.
 
-Validation:
+#Import the key into the Wazuh Agent manager UI on the Windows endpoint to finalize the "Active" handshake.
 
-Verify connectivity via the Wazuh Dashboard under the Agents tab.
+**Validation:**
 
-Test alert ingestion by triggering Event ID 4625 (Failed Logon) on the Windows endpoint and verifying the detection in the Threat Hunting module.
+#Verify connectivity via the Wazuh Dashboard under the Agents tab.
+
+#Test alert ingestion by triggering Event ID 4625 (Failed Logon) on the Windows endpoint and verifying the detection in the Threat Hunting module.
